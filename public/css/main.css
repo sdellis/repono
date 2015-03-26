@@ -1,0 +1,47 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+body {
+	font-family: "Alegreya",Georgia,Times,serif;
+	font-size: 2em;
+	color: #222222;
+  padding: 3em;
+}
+
+h1, h2, h3, h4, h5 {
+	font-family: "Alegreya SC","Alegreya",Georgia,Times,serif;
+	font-weight: normal;
+	letter-spacing: .02em;
+}
+
+p {
+	line-height: 2em;
+}
+
+li {
+	padding: .3em;
+}
+
+#notice {
+	display:none;
+}
+
+.manifests {
+	padding:3em;
+}
+
+#inputManifest {
+    border: 0 none white;
+    overflow: hidden;
+    padding: 0;
+    outline: none;
+    background-color: lightgray;
+    resize: none;
+    width: 100%;
+    height: 100px;
+}
+
+#edit { display: none }
