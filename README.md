@@ -15,7 +15,7 @@ $ node express.js
 ```
 
 ##Tests
-To run tests, in a new terminal window:
+Running tests will create a "manifests" collection, which is needed for the server to work. To run tests, in a new terminal window:
 
 ```
 $ mocha express.test.js
@@ -34,6 +34,21 @@ var db = mongoskin.db('mongodb://@localhost:27017/YourDBName', {safe:true})
 ```
 
 ##Add Manifests
-Go to [localhost:3000](http://localhost:3000) and start entering manifests.
+Go to [localhost:3000](http://localhost:3000) and start doing CRUD to manifests.
+
+You can also use CURL to do CRUD to your own collections and manifests.
+
+```
+$ curl -H "Content-Type: application/json" -X GET http://localhost:3000/collections/manifests/
+$ curl -H "Content-Type: application/json" -X GET http://localhost:3000/collections/manifests/:id
+$ curl -H "Content-Type: application/json" -X DELETE http://localhost:3000/collections/manifests/:id
+$ curl -H "Content-Type: application/json" -X PUT -d '{"label":"Thus Spoke Zarathustra"}' http://localhost:3000/collections/manifests/:id
+curl -H "Content-Type: application/json" -X POST -d '{"label":"Thus Spoke Zarathustra"}' http://localhost:3000/collections/manifests/
+```
+
+You can also create your own collections by simply posting to a new collection name (soon to be integrated with the web interface):
+```
+curl -H "Content-Type: application/json" -X POST -d '{"label":"Thus Spoke Zarathustra"}' http://localhost:3000/collections/MyNewCollection
+```
 
 > Attribution: This work is based on Azat Mardan's [REST-API-EXPRESS repository](https://github.com/azat-co/rest-api-express) for Express 4.
