@@ -12,7 +12,7 @@ app.use(logger('dev'))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
-var db = mongoskin.db('mongodb://@localhost:27017/manifests', {safe:true})
+var db = mongoskin.db('mongodb://@localhost:27017/test', {safe:true})
 
 app.param('collectionName', function(req, res, next, collectionName){
   req.collection = db.collection(collectionName)
