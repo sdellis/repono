@@ -5,9 +5,9 @@ describe('manifesto server', function(){
   var id
 
   it('posts an object', function(done){
-    superagent.post('http://localhost:3000/collections/manifests')
-      .send({ _id: 'foo:123'
-        , label: 'Thus Spoke Zarathustra'
+    superagent.post('http://localhost:3000/collections/test')
+      .send({ name: 'John'
+        , email: 'a@b.com'
       })
       .end(function(e, res){
         // console.log(res.body)
@@ -20,7 +20,7 @@ describe('manifesto server', function(){
   })
 
   it('retrieves an object', function(done){
-    superagent.get('http://localhost:3000/collections/manifests/'+id)
+    superagent.get('http://localhost:3000/collections/test/'+id)
       .end(function(e, res){
         // console.log(res.body)
         expect(e).to.eql(null)
@@ -32,7 +32,7 @@ describe('manifesto server', function(){
   })
 
   it('retrieves a collection', function(done){
-    superagent.get('http://localhost:3000/collections/manifests')
+    superagent.get('http://localhost:3000/collections/test')
       .end(function(e, res){
         // console.log(res.body)
         expect(e).to.eql(null)
@@ -43,8 +43,9 @@ describe('manifesto server', function(){
   })
 
   it('updates an object', function(done){
-    superagent.put('http://localhost:3000/collections/manifests/'+id)
-      .send({label: 'Thus Spoke Zarathustra'})
+    superagent.put('http://localhost:3000/collections/test/'+id)
+      .send({name: 'Peter'
+        , email: 'c@d.com'})
       .end(function(e, res){
         // console.log(res.body)
         expect(e).to.eql(null)
@@ -55,7 +56,7 @@ describe('manifesto server', function(){
   })
 
   it('checks an updated object', function(done){
-    superagent.get('http://localhost:3000/collections/manifests/'+id)
+    superagent.get('http://localhost:3000/collections/test/'+id)
       .end(function(e, res){
         // console.log(res.body)
         expect(e).to.eql(null)
@@ -67,12 +68,23 @@ describe('manifesto server', function(){
       })
   })
   it('removes an object', function(done){
-    superagent.del('http://localhost:3000/collections/manifests/'+id)
+    superagent.del('http://localhost:3000/collections/test/'+id)
       .end(function(e, res){
         // console.log(res.body)
         expect(e).to.eql(null)
         expect(typeof res.body).to.eql('object')
         expect(res.body.msg).to.eql('success')
+        done()
+      })
+  })
+
+  it('sets up a manifest collection', function(done){
+    superagent.post('http://localhost:3000/collections/manifests')
+      .send({ _id: 'foo:123'
+        , label: 'Thus Spoke Zarathustra'
+      })
+      .end(function(e, res){
+        // this is not a test
         done()
       })
   })

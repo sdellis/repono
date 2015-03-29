@@ -43,12 +43,12 @@ $ curl -H "Content-Type: application/json" -X GET http://localhost:3000/collecti
 $ curl -H "Content-Type: application/json" -X GET http://localhost:3000/collections/manifests/:id
 $ curl -H "Content-Type: application/json" -X DELETE http://localhost:3000/collections/manifests/:id
 $ curl -H "Content-Type: application/json" -X PUT -d '{"label":"Thus Spoke Zarathustra"}' http://localhost:3000/collections/manifests/:id
-curl -H "Content-Type: application/json" -X POST -d '{"label":"Thus Spoke Zarathustra"}' http://localhost:3000/collections/manifests/
+$ curl -H "Content-Type: application/json" -X POST -d '{"label":"Thus Spoke Zarathustra"}' http://localhost:3000/collections/manifests/
 ```
 
 You can also create your own collections by simply posting to a new collection name (soon to be integrated with the web interface):
 ```
-curl -H "Content-Type: application/json" -X POST -d '{"label":"Thus Spoke Zarathustra"}' http://localhost:3000/collections/MyNewCollection
+$ curl -H "Content-Type: application/json" -X POST -d '{"label":"Thus Spoke Zarathustra"}' http://localhost:3000/collections/MyNewCollection
 ```
 
 > Attribution: This work is based on Azat Mardan's [REST-API-EXPRESS repository](https://github.com/azat-co/rest-api-express) for Express 4.
