@@ -11,7 +11,7 @@ Note: If a manifest contains an @id property, the server will use the post-prefi
 $ git clone https://github.com/sdellis/manifesto.git
 $ cd manifesto
 $ npm install
-$ node express.js
+$ npm start
 ```
 
 ##Tests
