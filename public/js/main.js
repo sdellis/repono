@@ -101,8 +101,9 @@ $( "#formEditManifest" ).submit(function( event ) {
     $.ajax(
     {
         url : formURL,
+				contentType: "application/json",
 				method: "PUT",
-        data : payload,
+        data : postDataJSON,
         success:function(data, textStatus, jqXHR)
         {
 					refreshManifests('alert-success','<h2>Manifest created:</h2><pre>' + postDataJSON + '</pre>');
@@ -116,7 +117,9 @@ $( "#formEditManifest" ).submit(function( event ) {
 });
 
 $( "#formAddManifest" ).submit(function( event ) {
-		console.log("formdata: " + $(this));
+		event.preventDefault();
+		event.stopPropagation();
+		
 		var postData = $(this).serializeArray();
 		var payload = JSON.parse(postData[0].value);
     var formURL = $(this).attr("action");
@@ -126,8 +129,9 @@ $( "#formAddManifest" ).submit(function( event ) {
     $.ajax(
     {
         url : formURL,
+				contentType: "application/json",
 				method: "POST",
-        data : payload,
+        data : postDataJSON,
         success:function(data, textStatus, jqXHR)
         {
 					refreshManifests('alert-success','<h2>Manifest created:</h2><pre>' + postDataJSON + '</pre>');
@@ -137,9 +141,6 @@ $( "#formAddManifest" ).submit(function( event ) {
 					refreshManifests('alert-danger','<h2>' + errorThrown + '</h2><pre>' + postDataJSON + '</pre>');
         }
     });
-
-  event.preventDefault();
-  event.stopPropagation();
 
 });
 
