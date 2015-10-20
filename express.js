@@ -22,7 +22,7 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
    methods: 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
    allowedHeaders: 'X-Requested-With,content-type',
    credentials: true,
-   preflightContinue: false
+   preflightContinue: true
  };
 
  app.options('*', cors()); // include before other routes
