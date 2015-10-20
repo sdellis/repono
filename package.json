@@ -22,9 +22,7 @@
     "mongoskin": "1.4.4",
     "mongodb": "~2.0",
     "morgan": "1.5.0",
-    "serve-favicon": "~2.2.0"
-  },
-  "devDependencies": {
+    "serve-favicon": "~2.2.0",
     "expect.js": "^0.3.1",
     "mocha": "^1.18.2",
     "superagent": "^0.17.0"
