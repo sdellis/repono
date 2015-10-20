@@ -22,6 +22,7 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
  };
 
 // Add headers
+/*
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
@@ -41,6 +42,7 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+*/
 
 app.param('collectionName', function(req, res, next, collectionName){
   req.collection = db.collection(collectionName)
