@@ -14,7 +14,7 @@ app.use(logger('dev'))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
- var db = mongoskin.db(db_uri, {safe:true})
+ var db = mongoskin.db('mongodb://karl:marx@ds033439.mongolab.com:33439/manifesto', {safe:true})
 
 // Add headers
 app.use(function (req, res, next) {
