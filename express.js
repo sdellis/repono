@@ -12,7 +12,8 @@ app.use(logger('dev'))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
-var db = mongoskin.db('mongodb://@localhost:27017/test', {safe:true})
+// var db = mongoskin.db('mongodb://@localhost:27017/test', {safe:true})
+var db = mongoskin.db('mongodb://engels:marx@ds033439.mongolab.com:33439/manifesto', {safe:true})
 
 // Add headers
 app.use(function (req, res, next) {
@@ -88,6 +89,6 @@ app.delete('/collections/:collectionName/:id', function(req, res, next) {
   })
 })
 
-app.listen(3000, function(){
+app.listen(80, function(){
   console.log('Express server listening on port 3000')
 })
