@@ -4,6 +4,7 @@ var express = require('express'),
   path = require('path'),
   favicon = require('serve-favicon'),
   logger = require('morgan'),
+  db_uri = process.env.PROD_MONGODB || 'mongodb://@localhost:27017/test',
   port = process.env.PORT || 3000;
 
 var app = express()
@@ -13,8 +14,7 @@ app.use(logger('dev'))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
- var db = mongoskin.db('mongodb://@localhost:27017/test', {safe:true})
-//var db = mongoskin.db('mongodb://engels:marx@ds033439.mongolab.com:33439/manifesto', {safe:true})
+ var db = mongoskin.db(db_uri, {safe:true})
 
 // Add headers
 app.use(function (req, res, next) {
