@@ -20,12 +20,10 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
  var corsOptions = {
    origin: '*',
    methods: 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-   allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
-   credentials: true,
-   preflightContinue: false
+   allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept'
  };
 
- app.options('*', cors()); // include before other routes
+ app.options('/collections/:collectionName/:id', cors()); // include before other routes
 
 // Add headers
 /*
