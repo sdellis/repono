@@ -56,28 +56,28 @@ app.param('collectionName', function(req, res, next, collectionName){
   return next()
 })
 
-app.get('/', cors(), function(req, res, next) {
+app.get('/', function(req, res, next) {
   //res.send('please select a collection, e.g., /collections/messages')
   res.sendfile('/interface.html');
   path = req.params[0] ? req.params[0] : 'index.html';
   res.sendfile(path, {root: './public/'});
 })
 
-app.get('/collections/:collectionName', cors(), function(req, res, next) {
+app.get('/collections/:collectionName', function(req, res, next) {
   req.collection.find({} ,{limit: 10, sort: {'_id': -1}}).toArray(function(e, results){
     if (e) return next(e)
     res.send(results)
   })
 })
 
-app.get('/collections/:collectionName/:id', cors(), function(req, res, next) {
+app.get('/collections/:collectionName/:id', function(req, res, next) {
   req.collection.findById(req.params.id, function(e, result){
     if (e) return next(e)
     res.send(result)
   })
 })
 
-app.post('/collections/:collectionName', cors(), function(req, res, next) {
+app.post('/collections/:collectionName', function(req, res, next) {
   // if an @id is supplied use the post-prefix string as the _id and add it to the manifest
   if (typeof req.body["@id"] !== 'undefined') {
     var arr = req.body["@id"].split("/");
@@ -90,7 +90,7 @@ app.post('/collections/:collectionName', cors(), function(req, res, next) {
   })
 })
 
-app.put('/collections/:collectionName/:id', cors(), function(req, res, next) {
+app.put('/collections/:collectionName/:id', function(req, res, next) {
   req.collection.updateById(req.params.id, {$set: req.body}, {safe: true, multi: false}, function(e, result){
     if (e) return next(e)
     //res.status(204).send()
@@ -98,7 +98,7 @@ app.put('/collections/:collectionName/:id', cors(), function(req, res, next) {
   })
 })
 
-app.delete('/collections/:collectionName/:id', cors(), function(req, res, next) {
+app.delete('/collections/:collectionName/:id', function(req, res, next) {
   req.collection.removeById(req.params.id, function(e, result){
     if (e) return next(e)
     res.send((result === 1)?{msg: 'success'} : {msg: 'error'})
