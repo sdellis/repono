@@ -1,5 +1,5 @@
 var express = require('express'),
-  cors = require('cors'),
+  //cors = require('cors'),
   mongoskin = require('mongoskin'),
   bodyParser = require('body-parser'),
   path = require('path'),
@@ -9,35 +9,20 @@ var express = require('express'),
   port = process.env.PORT || 3000;
 
 var app = express()
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
-app.use(logger('dev'))
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(favicon(__dirname + '/public/favicon.ico'));
-
- var db = mongoskin.db(db_uri, {safe:true})
-
- var corsOptions = {
-   origin: '*',
-   methods: 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-   allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept'
- };
-
- app.options('/collections/:collectionName/:id', cors()); // include before other routes
 
 // Add headers
-/*
+
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
     // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
-    res.setHeader('Access-Control-Allow-Origin', 'http://sdellis.com');
+    res.setHeader('Access-Control-Allow-Origin', '*');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
     // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
@@ -46,7 +31,25 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(logger('dev'))
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(__dirname + '/public/favicon.ico'));
+
+ var db = mongoskin.db(db_uri, {safe:true})
+/*
+ var corsOptions = {
+   origin: '*',
+   methods: 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+   allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept'
+ };
+
+ app.options('/collections/:collectionName/:id', cors()); // include before other routes
 */
+
+
 
 app.param('collectionName', function(req, res, next, collectionName){
   req.collection = db.collection(collectionName)
