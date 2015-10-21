@@ -1,5 +1,5 @@
 var express = require('express'),
-  //cors = require('cors'),
+  cors = require('cors'),
   mongoskin = require('mongoskin'),
   bodyParser = require('body-parser'),
   path = require('path'),
@@ -16,17 +16,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
  var db = mongoskin.db(db_uri, {safe:true})
-/*
+
  var corsOptions = {
    origin: 'http://sdellis.com',
    methods: 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
    allowedHeaders: 'X-Requested-With,content-type',
    credentials: true,
-   preflightContinue: true
+   preflightContinue: false
  };
 
- app.options('*', cors()); // include before other routes
-*/
+ app.options('/collections/:collectionName/:id', cors()); // include before other routes
+
 // Add headers
 
 app.use(function (req, res, next) {
@@ -45,14 +45,6 @@ app.use(function (req, res, next) {
     // to the API (e.g. in case you use sessions)
     res.setHeader('Access-Control-Allow-Credentials', true);
 
-    // intercept OPTIONS method
-    if ('OPTIONS' == req.method) {
-      res.send(200);
-    }
-    else {
-      next();
-    }
-
     // Pass to next layer of middleware
     next();
 });
@@ -63,21 +55,21 @@ app.param('collectionName', function(req, res, next, collectionName){
   return next()
 })
 
-app.get('/', function(req, res, next) {
+app.get('/', cors(), function(req, res, next) {
   //res.send('please select a collection, e.g., /collections/messages')
   res.sendfile('/interface.html');
   path = req.params[0] ? req.params[0] : 'index.html';
   res.sendfile(path, {root: './public/'});
 })
 
-app.get('/collections/:collectionName', function(req, res, next) {
+app.get('/collections/:collectionName', cors(), function(req, res, next) {
   req.collection.find({} ,{limit: 10, sort: {'_id': -1}}).toArray(function(e, results){
     if (e) return next(e)
     res.send(results)
   })
 })
 
-app.post('/collections/:collectionName', function(req, res, next) {
+app.post('/collections/:collectionName', cors(), function(req, res, next) {
   // if an @id is supplied use the post-prefix string as the _id and add it to the manifest
   if (typeof req.body["@id"] !== 'undefined') {
     var arr = req.body["@id"].split("/");
@@ -90,21 +82,21 @@ app.post('/collections/:collectionName', function(req, res, next) {
   })
 })
 
-app.get('/collections/:collectionName/:id', function(req, res, next) {
+app.get('/collections/:collectionName/:id', cors(), function(req, res, next) {
   req.collection.findById(req.params.id, function(e, result){
     if (e) return next(e)
     res.send(result)
   })
 })
 
-app.put('/collections/:collectionName/:id', function(req, res, next) {
+app.put('/collections/:collectionName/:id', cors(), function(req, res, next) {
   req.collection.updateById(req.params.id, {$set: req.body}, {safe: true, multi: false}, function(e, result){
     if (e) return next(e)
     res.send((result === 1) ? {msg:'success'} : {msg: 'error'})
   })
 })
 
-app.delete('/collections/:collectionName/:id', function(req, res, next) {
+app.delete('/collections/:collectionName/:id', cors(), function(req, res, next) {
   req.collection.removeById(req.params.id, function(e, result){
     if (e) return next(e)
     res.send((result === 1)?{msg: 'success'} : {msg: 'error'})
