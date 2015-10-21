@@ -1,5 +1,5 @@
 var express = require('express'),
-  cors = require('cors'),
+  //cors = require('cors'),
   mongoskin = require('mongoskin'),
   bodyParser = require('body-parser'),
   path = require('path'),
