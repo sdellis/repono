@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "body-parser": "1.9.2",
-    "express": "4.10.1",
+    "express": "4.13.3",
     "mongoskin": "2.0.3",
     "mongodb": "~2.0",
     "morgan": "1.5.0",

@@ -119,7 +119,7 @@ $( "#formEditManifest" ).submit(function( event ) {
 $( "#formAddManifest" ).submit(function( event ) {
 		event.preventDefault();
 		event.stopPropagation();
-		
+
 		var postData = $(this).serializeArray();
 		var payload = JSON.parse(postData[0].value);
     var formURL = $(this).attr("action");
