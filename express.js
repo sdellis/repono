@@ -18,7 +18,7 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
  var db = mongoskin.db(db_uri, {safe:true})
 
  var corsOptions = {
-   origin: 'http://sdellis.com',
+   origin: true,
    methods: 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
    allowedHeaders: 'X-Requested-With,content-type',
    credentials: true,
