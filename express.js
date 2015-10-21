@@ -20,7 +20,7 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
  var corsOptions = {
    origin: true,
    methods: 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-   allowedHeaders: 'X-Requested-With,content-type',
+   allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
    credentials: true,
    preflightContinue: false
  };
@@ -92,8 +92,8 @@ app.post('/collections/:collectionName', cors(), function(req, res, next) {
 app.put('/collections/:collectionName/:id', cors(), function(req, res, next) {
   req.collection.updateById(req.params.id, {$set: req.body}, {safe: true, multi: false}, function(e, result){
     if (e) return next(e)
-    res.status(204).send()
-    //res.send((result === 1) ? {msg:'success'} : {msg: 'error'})
+    //res.status(204).send()
+    res.send((result === 1) ? {msg:'success'} : {msg: 'error'})
   })
 })
 
