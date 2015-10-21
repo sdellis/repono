@@ -25,7 +25,7 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
    preflightContinue: false
  };
 
- //app.options('/collections/:collectionName/:id', cors()); // include before other routes
+ app.options('*', cors()); // include before other routes
 
 // Add headers
 /*
