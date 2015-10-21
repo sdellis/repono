@@ -16,7 +16,7 @@ app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
     // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Origin', 'http://sdellis.com');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(__dirname + '/public/favicon.ico'));
 
  var db = mongoskin.db(db_uri, {safe:true})
-/*
+
  var corsOptions = {
    origin: '*',
    methods: 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
@@ -53,7 +53,7 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
  };
 
  app.options('/collections/:collectionName/:id', cors()); // include before other routes
-*/
+
 
 
 
@@ -114,3 +114,4 @@ app.delete('/collections/:collectionName/:id', function(req, res, next) {
 app.listen(port, function(){
   console.log('Express server listening on port ' + port)
 })
+*/
