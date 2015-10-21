@@ -18,14 +18,14 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
  var db = mongoskin.db(db_uri, {safe:true})
 
  var corsOptions = {
-   origin: true,
+   origin: '*',
    methods: 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
    allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept',
    credentials: true,
    preflightContinue: false
  };
 
- app.options('/collections/:collectionName/:id', cors()); // include before other routes
+ //app.options('/collections/:collectionName/:id', cors()); // include before other routes
 
 // Add headers
 /*
