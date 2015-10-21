@@ -69,6 +69,13 @@ app.get('/collections/:collectionName', cors(), function(req, res, next) {
   })
 })
 
+app.get('/collections/:collectionName/:id', cors(), function(req, res, next) {
+  req.collection.findById(req.params.id, function(e, result){
+    if (e) return next(e)
+    res.send(result)
+  })
+})
+
 app.post('/collections/:collectionName', cors(), function(req, res, next) {
   // if an @id is supplied use the post-prefix string as the _id and add it to the manifest
   if (typeof req.body["@id"] !== 'undefined') {
@@ -82,17 +89,11 @@ app.post('/collections/:collectionName', cors(), function(req, res, next) {
   })
 })
 
-app.get('/collections/:collectionName/:id', cors(), function(req, res, next) {
-  req.collection.findById(req.params.id, function(e, result){
-    if (e) return next(e)
-    res.send(result)
-  })
-})
-
 app.put('/collections/:collectionName/:id', cors(), function(req, res, next) {
   req.collection.updateById(req.params.id, {$set: req.body}, {safe: true, multi: false}, function(e, result){
     if (e) return next(e)
-    res.send((result === 1) ? {msg:'success'} : {msg: 'error'})
+    res.status(204).send()
+    //res.send((result === 1) ? {msg:'success'} : {msg: 'error'})
   })
 })
 
