@@ -1,15 +1,15 @@
-![manifesto icon](public/img/manifesto.png?raw=true) Manifesto
+![manifesto icon](public/img/manifesto.png?raw=true) Repono
 =============================================================================
 
-Manifesto is a RESTful API for creating and editing [IIIF Presentation Manifests](http://iiif.io/api/presentation/2.0/). It is a simple datastore that can be used for test data (and potentially more).  Since client-side "testing" is one of the use cases, Manifesto must be able to store invalid manifests that clients respond to.  Therefore no validation is performed and is left up to the clients.
+Repono is a RESTful API for creating and editing [IIIF Presentation Manifests](http://iiif.io/api/presentation/2.0/). It is a simple datastore that can be used for test data (and potentially more).  Since client-side "testing" is one of the use cases, Repono must be able to store invalid manifests that clients respond to.  Therefore no validation is performed and is left up to the clients.
 
 Note: If a manifest contains an @id property, the server will use the post-prefix id string as MongoDB's internal _id value.  Otherwise, one will be generated.
 
 ##Brief instructions:
 
 ```
-$ git clone https://github.com/sdellis/manifesto.git
-$ cd manifesto
+$ git clone https://github.com/sdellis/repono.git
+$ cd repono
 $ npm install
 $ npm start
 ```
